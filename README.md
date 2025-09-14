@@ -338,6 +338,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support
-
-If you encounter any issues or have questions, please file an issue on the [GitHub repository](https://github.com/yourusername/react-native-release-logger/issues).
