@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2024-12-07
 
 ### Added
+
 - Initial release of react-native-release-logger
 - File-based logging system for React Native release builds
 - Automatic log rotation based on file size and count
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Jest test suite with mocked dependencies
 
 ### Features
+
 - **Core Logging**: Write logs to files with timestamps and log levels
 - **Log Rotation**: Automatic file rotation when size limits are reached
 - **Console Replacement**: Option to replace console methods to capture existing logs

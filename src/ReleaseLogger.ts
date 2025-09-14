@@ -42,7 +42,9 @@ class ReleaseLogger implements LoggerInstance {
       }
 
       // Create log directory if it doesn't exist
-      const dirExists = await platformLogger.fileExists(this.config.logDirectory);
+      const dirExists = await platformLogger.fileExists(
+        this.config.logDirectory
+      );
       if (!dirExists) {
         await platformLogger.createDirectory(this.config.logDirectory);
       }
@@ -104,7 +106,9 @@ class ReleaseLogger implements LoggerInstance {
           currentFiles.length - this.config.maxFiles + 1
         );
         for (const file of filesToDelete) {
-          await platformLogger.deleteLogFile(`${this.config.logDirectory}/${file}`);
+          await platformLogger.deleteLogFile(
+            `${this.config.logDirectory}/${file}`
+          );
         }
       }
 
@@ -133,7 +137,9 @@ class ReleaseLogger implements LoggerInstance {
           logFiles.length - this.config.maxFiles
         );
         for (const file of filesToDelete) {
-          await platformLogger.deleteLogFile(`${this.config.logDirectory}/${file}`);
+          await platformLogger.deleteLogFile(
+            `${this.config.logDirectory}/${file}`
+          );
         }
       }
     } catch (error) {
@@ -227,7 +233,9 @@ class ReleaseLogger implements LoggerInstance {
       );
 
       for (const file of logFiles) {
-        await platformLogger.deleteLogFile(`${this.config.logDirectory}/${file}`);
+        await platformLogger.deleteLogFile(
+          `${this.config.logDirectory}/${file}`
+        );
       }
 
       // Reset current log file
@@ -241,7 +249,9 @@ class ReleaseLogger implements LoggerInstance {
 
   async getLogFiles(): Promise<string[]> {
     try {
-      const dirExists = await platformLogger.fileExists(this.config.logDirectory);
+      const dirExists = await platformLogger.fileExists(
+        this.config.logDirectory
+      );
       if (!dirExists) return [];
 
       return await platformLogger.listLogFiles(this.config.logDirectory);

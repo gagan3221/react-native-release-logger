@@ -34,6 +34,7 @@ yarn add react-native-fs
 ```
 
 For React Native 0.60+, run:
+
 ```bash
 cd ios && pod install
 ```
@@ -45,13 +46,16 @@ For older versions, you may need to manually link the library.
 The package includes native Android modules for optimized performance. No additional setup is required for React Native 0.60+.
 
 For manual linking (RN < 0.60):
+
 1. Add to `android/settings.gradle`:
+
 ```gradle
 include ':react-native-release-logger'
 project(':react-native-release-logger').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-release-logger/android')
 ```
 
 2. Add to `android/app/build.gradle`:
+
 ```gradle
 dependencies {
     implementation project(':react-native-release-logger')
@@ -59,6 +63,7 @@ dependencies {
 ```
 
 3. Add to `MainApplication.java`:
+
 ```java
 import com.reactnativereleaselogger.ReleaseLoggerPackage;
 
@@ -82,23 +87,23 @@ For manual linking (RN < 0.60), add the iOS files to your Xcode project.
 ### Basic Usage
 
 ```typescript
-import { initializeReleaseLogger } from 'react-native-release-logger';
+import { initializeReleaseLogger } from "react-native-release-logger";
 
 // Initialize the logger
 const logger = initializeReleaseLogger();
 
 // Use it like console
-logger.log('Application started');
-logger.info('User logged in', { userId: 123 });
-logger.warn('Low memory warning');
-logger.error('API request failed', error);
-logger.debug('Debug information', { data: someData });
+logger.log("Application started");
+logger.info("User logged in", { userId: 123 });
+logger.warn("Low memory warning");
+logger.error("API request failed", error);
+logger.debug("Debug information", { data: someData });
 ```
 
 ### Replace Console Methods
 
 ```typescript
-import { replaceConsole } from 'react-native-release-logger';
+import { replaceConsole } from "react-native-release-logger";
 
 // Replace console methods with file logging
 replaceConsole({
@@ -107,23 +112,26 @@ replaceConsole({
 });
 
 // Now all console.log, console.error, etc. will be saved to files
-console.log('This will be saved to a file!');
-console.error('Errors are captured too!');
+console.log("This will be saved to a file!");
+console.error("Errors are captured too!");
 ```
 
 ## Configuration
 
 ```typescript
-import { initializeReleaseLogger, ReleaseLoggerConfig } from 'react-native-release-logger';
+import {
+  initializeReleaseLogger,
+  ReleaseLoggerConfig,
+} from "react-native-release-logger";
 
 const config: ReleaseLoggerConfig = {
-  maxFileSize: 5 * 1024 * 1024,    // 5MB per file (default)
-  maxFiles: 5,                      // Keep 5 log files (default)
-  logDirectory: undefined,          // Custom directory (optional)
-  filePrefix: 'app-log',           // Log file prefix (default)
-  enabled: true,                   // Enable/disable logging (default: true)
-  minLevel: 'log',                 // Minimum log level (default: 'log')
-  includeStackTrace: true,         // Include stack trace for errors (default: true)
+  maxFileSize: 5 * 1024 * 1024, // 5MB per file (default)
+  maxFiles: 5, // Keep 5 log files (default)
+  logDirectory: undefined, // Custom directory (optional)
+  filePrefix: "app-log", // Log file prefix (default)
+  enabled: true, // Enable/disable logging (default: true)
+  minLevel: "log", // Minimum log level (default: 'log')
+  includeStackTrace: true, // Include stack trace for errors (default: true)
 };
 
 const logger = initializeReleaseLogger(config);
@@ -131,19 +139,20 @@ const logger = initializeReleaseLogger(config);
 
 ### Configuration Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `maxFileSize` | number | 5MB | Maximum file size before rotation |
-| `maxFiles` | number | 5 | Maximum number of log files to keep |
-| `logDirectory` | string | `DocumentDirectoryPath/logs` | Custom log directory path |
-| `filePrefix` | string | `'app-log'` | Prefix for log file names |
-| `enabled` | boolean | `true` | Enable or disable logging |
-| `minLevel` | LogLevel | `'log'` | Minimum log level to capture |
-| `includeStackTrace` | boolean | `true` | Include stack traces for errors |
+| Option              | Type     | Default                      | Description                         |
+| ------------------- | -------- | ---------------------------- | ----------------------------------- |
+| `maxFileSize`       | number   | 5MB                          | Maximum file size before rotation   |
+| `maxFiles`          | number   | 5                            | Maximum number of log files to keep |
+| `logDirectory`      | string   | `DocumentDirectoryPath/logs` | Custom log directory path           |
+| `filePrefix`        | string   | `'app-log'`                  | Prefix for log file names           |
+| `enabled`           | boolean  | `true`                       | Enable or disable logging           |
+| `minLevel`          | LogLevel | `'log'`                      | Minimum log level to capture        |
+| `includeStackTrace` | boolean  | `true`                       | Include stack traces for errors     |
 
 ### Log Levels
 
 The package supports five log levels in order of severity:
+
 - `debug` (lowest)
 - `log`
 - `info`
@@ -190,13 +199,15 @@ restoreConsole(): void
 This package includes platform-specific native modules that provide significant performance improvements over pure JavaScript implementations:
 
 ### Android Native Features
+
 - **Optimized File I/O**: Direct file operations using Java NIO for better performance
 - **Background Processing**: File operations don't block the JavaScript thread
 - **Memory Efficient**: Streaming writes for large log files
 - **Device Information**: Access to detailed Android device information
 - **Storage Management**: Intelligent handling of internal vs external storage
 
-### iOS Native Features  
+### iOS Native Features
+
 - **Core Foundation Integration**: Uses native iOS file system APIs
 - **Memory Management**: Automatic memory management for large files
 - **Background Safety**: File operations are thread-safe
@@ -204,6 +215,7 @@ This package includes platform-specific native modules that provide significant 
 - **Sandbox Compliance**: Respects iOS app sandbox restrictions
 
 ### Fallback Mechanism
+
 If native modules fail to load or encounter errors, the package automatically falls back to the JavaScript implementation using `react-native-fs`, ensuring your app continues to function normally.
 
 ## Advanced Usage
@@ -211,12 +223,12 @@ If native modules fail to load or encounter errors, the package automatically fa
 ### Custom Log Directory
 
 ```typescript
-import RNFS from 'react-native-fs';
-import { initializeReleaseLogger } from 'react-native-release-logger';
+import RNFS from "react-native-fs";
+import { initializeReleaseLogger } from "react-native-release-logger";
 
 const logger = initializeReleaseLogger({
   logDirectory: `${RNFS.ExternalStorageDirectoryPath}/MyAppLogs`,
-  filePrefix: 'production-log',
+  filePrefix: "production-log",
   maxFileSize: 2 * 1024 * 1024, // 2MB files
   maxFiles: 10, // Keep 10 files
 });
@@ -225,28 +237,28 @@ const logger = initializeReleaseLogger({
 ### Conditional Logging
 
 ```typescript
-import { initializeReleaseLogger } from 'react-native-release-logger';
+import { initializeReleaseLogger } from "react-native-release-logger";
 
 const logger = initializeReleaseLogger({
   enabled: !__DEV__, // Only enable in release builds
-  minLevel: 'warn',  // Only log warnings and errors
+  minLevel: "warn", // Only log warnings and errors
 });
 ```
 
 ### Exporting Logs for Analysis
 
 ```typescript
-import { Share } from 'react-native';
-import { getReleaseLogger } from 'react-native-release-logger';
+import { Share } from "react-native";
+import { getReleaseLogger } from "react-native-release-logger";
 
 const exportLogs = async () => {
   const logger = getReleaseLogger();
   const logs = await logger.exportLogs();
-  
+
   if (logs) {
     Share.share({
       message: logs,
-      title: 'Application Logs',
+      title: "Application Logs",
     });
   }
 };
@@ -255,13 +267,13 @@ const exportLogs = async () => {
 ### Error Boundary Integration
 
 ```typescript
-import React from 'react';
-import { getReleaseLogger } from 'react-native-release-logger';
+import React from "react";
+import { getReleaseLogger } from "react-native-release-logger";
 
 class ErrorBoundary extends React.Component {
   componentDidCatch(error: Error, errorInfo: any) {
     const logger = getReleaseLogger();
-    logger.error('React Error Boundary caught an error:', {
+    logger.error("React Error Boundary caught an error:", {
       error: error.message,
       stack: error.stack,
       componentStack: errorInfo.componentStack,
@@ -309,12 +321,12 @@ Log files are stored in a human-readable format:
 ```typescript
 // Enable debug logging to see logger internal messages
 const logger = initializeReleaseLogger({
-  minLevel: 'debug',
+  minLevel: "debug",
 });
 
 // Check if logs are being written
-logger.getLogFiles().then(files => {
-  console.log('Log files:', files);
+logger.getLogFiles().then((files) => {
+  console.log("Log files:", files);
 });
 ```
 
