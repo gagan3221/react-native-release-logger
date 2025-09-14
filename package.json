@@ -1,0 +1,58 @@
+{
+  "name": "react-native-release-logger",
+  "version": "1.0.0",
+  "description": "A React Native package to capture and store console logs in release builds for debugging purposes",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "react-native": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "jest",
+    "lint": "eslint src --ext .ts,.tsx"
+  },
+  "keywords": [
+    "react-native",
+    "logging",
+    "debug",
+    "release",
+    "console",
+    "file-logging",
+    "crash-reporting"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/react-native-release-logger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/react-native-release-logger/issues"
+  },
+  "homepage": "https://github.com/yourusername/react-native-release-logger#readme",
+  "peerDependencies": {
+    "react-native": ">=0.60.0"
+  },
+  "dependencies": {
+    "react-native-fs": "^2.20.0"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.72.0",
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "lib/",
+    "android/",
+    "ios/",
+    "react-native.config.js",
+    "README.md",
+    "LICENSE"
+  ]
+}
